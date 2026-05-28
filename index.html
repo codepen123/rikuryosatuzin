@@ -140,33 +140,7 @@ visibility:hidden;
 100%{opacity:.3}
 
 }
-
-/* ===== CURSOR ===== */
-
-.cursor-glow{
-
-position:fixed;
-
-width:320px;
-height:320px;
-
-border-radius:50%;
-
-background:
-radial-gradient(circle,
-rgba(0,255,255,.15) 0%,
-transparent 70%
-);
-
-pointer-events:none;
-
-transform:translate(-50%,-50%);
-
-mix-blend-mode:screen;
-
-z-index:0;
-
-}
+/
 
 /* ===== BLOOD ===== */
 
@@ -729,8 +703,7 @@ SYSTEM INITIALIZING...
 
 </div>
 
-<div
-<div class="cursor-glow"></div>
+<div>
 
 <nav>
 
@@ -894,21 +867,7 @@ Instagram
 
 <script>
 
-/* ===== CURSOR ===== */
-
-const glow=document.querySelector('.cursor-glow');
-
-window.addEventListener('mousemove',e=>{
-
-glow.animate({
-left:e.clientX+'px',
-top:e.clientY+'px'
-},{
-duration:300,
-fill:'forwards'
-});
-
-});
+/* =
 
 /* ===== BLOOD ===== */
 
