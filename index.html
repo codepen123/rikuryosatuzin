@@ -141,27 +141,6 @@ visibility:hidden;
 
 }
 
-/* ===== FLASHLIGHT ===== */
-
-.flashlight{
-
-position:fixed;
-inset:0;
-
-pointer-events:none;
-
-z-index:9997;
-
-background:
-radial-gradient(
-circle 180px at var(--x,50%) var(--y,50%),
-transparent 0%,
-rgba(0,0,0,.18) 35%,
-rgba(0,0,0,.96) 75%
-);
-
-}
-
 /* ===== CURSOR ===== */
 
 .cursor-glow{
@@ -750,7 +729,7 @@ SYSTEM INITIALIZING...
 
 </div>
 
-<div class="flashlight"></div>
+<div
 <div class="cursor-glow"></div>
 
 <nav>
@@ -928,14 +907,6 @@ top:e.clientY+'px'
 duration:300,
 fill:'forwards'
 });
-
-document.documentElement
-.style
-.setProperty('--x',e.clientX+'px');
-
-document.documentElement
-.style
-.setProperty('--y',e.clientY+'px');
 
 });
 
