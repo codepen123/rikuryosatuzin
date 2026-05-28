@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>六稜祭殺人事件</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Shippori+Mincho:wght@700;800&display=swap" rel="stylesheet">
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+html{
+scroll-behavior:smooth;
+}
+
+body{
+font-family:'Noto Sans JP',sans-serif;
+background:#050816;
+color:white;
+overflow-x:hidden;
+line-height:1.9;
+cursor:none;
+
+background:
+radial-gradient(circle at top,#101933 0%,#050816 60%);
+}
+
+/* ===== VHS ===== */
+
+body::before{
+
+content:'';
+
+position:fixed;
+inset:0;
+
+pointer-events:none;
+
+background:
+repeating-linear-gradient(
+to bottom,
+rgba(255,255,255,.02),
+rgba(255,255,255,.02) 1px,
+transparent 1px,
+transparent 3px
+);
+
+opacity:.12;
+
+z-index:9998;
+
+}
+
+/* ===== INTRO ===== */
+
+#intro{
+
+position:fixed;
+inset:0;
+
+background:black;
+
+z-index:10000;
+
+display:flex;
+justify-content:center;
+align-items:center;
+flex-direction:column;
+
+animation:introFade 5s forwards;
+
+}
+
+.intro-title{
+
+font-family:'Shippori Mincho',serif;
+
+font-size:clamp(2rem,8vw,5rem);
+
+letter-spacing:.2em;
+
+animation:glitch 1s infinite;
+
+}
+
+.intro-sub{
+
+margin-top:1rem;
+
+font-size:.8rem;
+
+letter-spacing:.35em;
+
+color:#8c96b2;
+
+animation:pulse 2s infinite;
+
+}
+
+@keyframes introFade{
+
+0%,80%{
+opacity:1;
+visibility:visible;
+}
+
+100%{
+opacity:0;
+visibility:hidden;
+}
+
+}
+
+@keyframes glitch{
+
+0%{transform:translate(0)}
+20%{transform:translate(-2px,2px)}
+40%{transform:translate(2px,-2px)}
+60%{transform:translate(-2px,0)}
+80%{transform:translate(2px,2px)}
+100%{transform:translate(0)}
+
+}
+
+@keyframes pulse{
+
+0%{opacity:.3}
+50%{opacity:1}
+100%{opacity:.3}
+
+}
+
+/* ===== FLASHLIGHT ===== */
+
+.flashlight{
+
+position:fixed;
+inset:0;
+
+pointer-events:none;
+
+z-index:9997;
+
+background:
+radial-gradient(
+circle 180px at var(--x,50%) var(--y,50%),
+transparent 0%,
+rgba(0,0,0,.18) 35%,
+rgba(0,0,0,.96) 75%
+);
+
+}
+
+/* ===== CURSOR ===== */
+
+.cursor-glow{
+
+position:fixed;
+
+width:320px;
+height:320px;
+
+border-radius:50%;
+
+background:
+radial-gradient(circle,
+rgba(0,255,255,.15) 0%,
+transparent 70%
+);
+
+pointer-events:none;
+
+transform:translate(-50%,-50%);
+
+mix-blend-mode:screen;
+
+z-index:0;
+
+}
+
+/* ===== BLOOD ===== */
+
+.blood{
+
+position:fixed;
+
+width:8px;
+height:8px;
+
+background:#ff0033;
+
+border-radius:50%;
+
+pointer-events:none;
+
+opacity:.45;
+
+filter:blur(1px);
+
+animation:fall linear infinite;
+
+}
+
+@keyframes fall{
+
+from{
+transform:translateY(-10vh);
+opacity:0;
+}
+
+20%{
+opacity:.6;
+}
+
+to{
+transform:translateY(110vh);
+opacity:0;
+}
+
+}
+
+/* ===== NAV ===== */
+
+nav{
+
+position:fixed;
+
+top:0;
+left:0;
+
+width:100%;
+height:60px;
+
+padding:0 2rem;
+
+display:flex;
+justify-content:space-between;
+align-items:center;
+
+background:rgba(5,8,22,.7);
+
+backdrop-filter:blur(14px);
+
+border-bottom:
+1px solid rgba(0,255,255,.1);
+
+z-index:100;
+
+}
+
+.logo{
+
+font-family:'Shippori Mincho',serif;
+
+color:#00ffff;
+
+letter-spacing:.2em;
+
+font-size:1.2rem;
+
+}
+
+nav a{
+
+text-decoration:none;
+
+color:#8c96b2;
+
+margin-left:1.4rem;
+
+transition:.3s;
+
+}
+
+nav a:hover{
+color:#00ffff;
+}
+
+/* ===== HERO ===== */
+
+#hero{
+
+min-height:100vh;
+
+display:flex;
+justify-content:center;
+align-items:center;
+
+text-align:center;
+
+position:relative;
+overflow:hidden;
+
+}
+
+.grid{
+
+position:absolute;
+inset:0;
+
+background-image:
+linear-gradient(rgba(0,255,255,.07) 1px, transparent 1px),
+linear-gradient(90deg, rgba(0,255,255,.07) 1px, transparent 1px);
+
+background-size:40px 40px;
+
+animation:gridMove 14s linear infinite;
+
+mask-image:
+radial-gradient(circle at center,
+black 30%,
+transparent 80%);
+
+}
+
+@keyframes gridMove{
+
+from{
+transform:translateY(0)
+}
+
+to{
+transform:translateY(40px)
+}
+
+}
+
+.hero-content{
+
+position:relative;
+
+z-index:2;
+
+padding:2rem;
+
+}
+
+.hero-sub{
+
+letter-spacing:.35em;
+
+font-size:.8rem;
+
+color:#8c96b2;
+
+margin-bottom:1.5rem;
+
+}
+
+.hero-title{
+
+font-family:'Shippori Mincho',serif;
+
+font-size:clamp(3rem,10vw,6rem);
+
+line-height:1.2;
+
+letter-spacing:.08em;
+
+position:relative;
+
+text-shadow:
+0 0 20px rgba(0,255,255,.5),
+0 0 60px rgba(0,255,255,.2);
+
+animation:flicker 4s infinite alternate;
+
+}
+
+.hero-title::before,
+.hero-title::after{
+
+content:attr(data-text);
+
+position:absolute;
+
+left:0;
+top:0;
+
+width:100%;
+
+}
+
+.hero-title::before{
+
+color:#00ffff;
+
+z-index:-1;
+
+animation:glitchBlue 2s infinite;
+
+}
+
+.hero-title::after{
+
+color:#ff0033;
+
+z-index:-2;
+
+animation:glitchRed 2s infinite;
+
+}
+
+@keyframes glitchBlue{
+
+0%,100%{transform:none}
+20%{transform:translate(-3px,2px)}
+40%{transform:translate(-2px,-2px)}
+60%{transform:translate(2px,2px)}
+80%{transform:translate(3px,-1px)}
+
+}
+
+@keyframes glitchRed{
+
+0%,100%{transform:none}
+20%{transform:translate(3px,-2px)}
+40%{transform:translate(2px,2px)}
+60%{transform:translate(-2px,-1px)}
+80%{transform:translate(-3px,2px)}
+
+}
+
+@keyframes flicker{
+
+0%{
+text-shadow:
+0 0 10px rgba(0,255,255,.2),
+0 0 30px rgba(0,255,255,.1);
+}
+
+100%{
+text-shadow:
+0 0 20px rgba(0,255,255,.6),
+0 0 60px rgba(0,255,255,.2);
+}
+
+}
+
+.hero-line{
+
+width:70px;
+height:2px;
+
+background:
+linear-gradient(
+90deg,
+transparent,
+#00ffff,
+transparent
+);
+
+margin:2rem auto;
+
+}
+
+.enter-btn{
+
+display:inline-block;
+
+padding:1rem 2.5rem;
+
+border-radius:50px;
+
+border:
+1px solid rgba(0,255,255,.3);
+
+text-decoration:none;
+
+color:white;
+
+transition:.3s;
+
+}
+
+.enter-btn:hover{
+
+transform:translateY(-5px);
+
+border-color:#00ffff;
+
+box-shadow:
+0 0 25px rgba(0,255,255,.25);
+
+}
+
+/* ===== SECTION ===== */
+
+section{
+
+padding:5rem 1.5rem;
+
+position:relative;
+
+z-index:2;
+
+}
+
+.container{
+
+max-width:760px;
+
+margin:auto;
+
+}
+
+.section-title{
+
+font-family:'Shippori Mincho',serif;
+
+text-align:center;
+
+font-size:2rem;
+
+margin-bottom:2rem;
+
+color:#00ffff;
+
+letter-spacing:.15em;
+
+}
+
+.card{
+
+background:
+rgba(20,24,40,.72);
+
+backdrop-filter:blur(14px);
+
+border:
+1px solid rgba(255,255,255,.08);
+
+border-radius:18px;
+
+padding:2rem;
+
+transition:.4s;
+
+}
+
+.card:hover{
+
+transform:translateY(-8px);
+
+border-color:
+rgba(0,255,255,.5);
+
+box-shadow:
+0 0 25px rgba(0,255,255,.15),
+0 0 70px rgba(0,255,255,.08);
+
+}
+
+/* ===== TYPEWRITER ===== */
+
+.typewriter{
+
+font-size:1rem;
+
+line-height:2.3;
+
+min-height:260px;
+
+white-space:pre-wrap;
+
+}
+
+/* ===== INFO ===== */
+
+.info-grid{
+
+display:grid;
+
+grid-template-columns:1fr 1fr;
+
+gap:1rem;
+
+}
+
+.info-item{
+text-align:center;
+}
+
+.info-label{
+
+font-size:.75rem;
+
+color:#8c96b2;
+
+letter-spacing:.2em;
+
+margin-bottom:.5rem;
+
+}
+
+/* ===== NOTICE ===== */
+
+.notice-list{
+
+list-style:none;
+
+display:flex;
+flex-direction:column;
+
+gap:1.2rem;
+
+line-height:2;
+
+}
+
+.notice-list li{
+
+position:relative;
+
+padding-left:1.8rem;
+
+padding-top:.4rem;
+padding-bottom:.4rem;
+padding-right:.8rem;
+
+color:#d6deff;
+
+border-left:
+2px solid rgba(0,255,255,.25);
+
+background:
+rgba(255,255,255,.02);
+
+border-radius:10px;
+
+transition:.35s;
+
+overflow:hidden;
+
+}
+
+.notice-list li::before{
+
+content:'▍';
+
+position:absolute;
+
+left:.6rem;
+top:.45rem;
+
+color:#00ffff;
+
+text-shadow:
+0 0 10px rgba(0,255,255,.5);
+
+}
+
+.notice-list li:hover{
+
+transform:
+translateX(6px);
+
+border-left:
+2px solid #00ffff;
+
+background:
+rgba(0,255,255,.05);
+
+box-shadow:
+0 0 20px rgba(0,255,255,.08);
+
+}
+
+/* ===== FOOTER ===== */
+
+footer{
+
+text-align:center;
+
+padding:3rem 1rem;
+
+border-top:
+1px solid rgba(255,255,255,.06);
+
+}
+
+.insta{
+
+display:inline-block;
+
+padding:.9rem 1.8rem;
+
+border-radius:40px;
+
+border:
+1px solid rgba(0,255,255,.15);
+
+text-decoration:none;
+
+color:#8c96b2;
+
+transition:.3s;
+
+margin-bottom:1rem;
+
+}
+
+.insta:hover{
+
+color:#00ffff;
+
+border-color:#00ffff;
+
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:700px){
+
+.info-grid{
+grid-template-columns:1fr;
+}
+
+.hero-title{
+font-size:3.3rem;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<div id="intro">
+
+<h1 class="intro-title">
+六稜祭殺人事件
+</h1>
+
+<p class="intro-sub">
+SYSTEM INITIALIZING...
+</p>
+
+</div>
+
+<div class="flashlight"></div>
+<div class="cursor-glow"></div>
+
+<nav>
+
+<div class="logo">1-1</div>
+
+<div>
+<a href="#synopsis">あらすじ</a>
+<a href="#info">Information</a>
+<a href="#notice">注意事項</a>
+</div>
+
+</nav>
+
+<section id="hero">
+
+<div class="grid"></div>
+
+<div class="hero-content">
+
+<p class="hero-sub">
+北野高校 六稜祭 2026 ── 1年1組 presents
+</p>
+
+<h1 class="hero-title"
+data-text="六稜祭 殺人事件">
+
+六稜祭<br>
+殺人事件
+
+</h1>
+
+<div class="hero-line"></div>
+
+<a class="enter-btn" href="#synopsis">
+ENTER
+</a>
+
+</div>
+
+</section>
+
+<section id="synopsis">
+
+<div class="container">
+
+<h2 class="section-title">
+あらすじ
+</h2>
+
+<div class="card">
+
+<div id="typewriter"
+class="typewriter"></div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="info">
+
+<div class="container">
+
+<h2 class="section-title">
+Information
+</h2>
+
+<div class="info-grid">
+
+<div class="card info-item">
+<div class="info-label">日程</div>
+<div>2026年6月6日（金）・8日（日）</div>
+</div>
+
+<div class="card info-item">
+<div class="info-label">会場</div>
+<div>北野高校 1-1（310教室）</div>
+</div>
+
+<div class="card info-item">
+<div class="info-label">主催</div>
+<div>1年1組</div>
+</div>
+
+<div class="card info-item">
+<div class="info-label">ジャンル</div>
+<div>ミステリー / 推理</div>
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<section id="notice">
+
+<div class="container">
+
+<h2 class="section-title">
+注意事項
+</h2>
+
+<div class="card">
+
+<ul class="notice-list">
+
+<li>
+この物語はフィクションです
+</li>
+
+<li>
+殺人が発生します
+</li>
+
+<li>
+アシスタントと共に容疑者に話を聞いて下さい。
+</li>
+
+<li>
+容疑者の「覚えてません」は
+事件に関係ないことなので深く考えないで下さい
+</li>
+
+<li>
+暴言禁止
+</li>
+
+<li>
+他の参加者と協力してください
+</li>
+
+<li>
+ゲーム終了後も背後にはお気をつけて
+</li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<footer>
+
+<a class="insta"
+target="_blank"
+href="https://www.instagram.com/ktn.1_1.murder?igsh=MWUydWVkcWEyZHFoYQ==">
+
+Instagram
+
+</a>
+
+<p style="color:#8c96b2;font-size:.8rem;">
+© 2026 北野高校 1年1組
+</p>
+
+</footer>
+
+<script>
+
+/* ===== CURSOR ===== */
+
+const glow=document.querySelector('.cursor-glow');
+
+window.addEventListener('mousemove',e=>{
+
+glow.animate({
+left:e.clientX+'px',
+top:e.clientY+'px'
+},{
+duration:300,
+fill:'forwards'
+});
+
+document.documentElement
+.style
+.setProperty('--x',e.clientX+'px');
+
+document.documentElement
+.style
+.setProperty('--y',e.clientY+'px');
+
+});
+
+/* ===== BLOOD ===== */
+
+for(let i=0;i<40;i++){
+
+const b=document.createElement('div');
+
+b.className='blood';
+
+b.style.left=Math.random()*100+'vw';
+
+b.style.animationDuration=
+(5+Math.random()*8)+'s';
+
+b.style.animationDelay=
+Math.random()*5+'s';
+
+document.body.appendChild(b);
+
+}
+
+/* ===== TYPEWRITER ===== */
+
+const text=`六稜祭に遊びにきたあなたは、
+1-1の310教室内から叫び声がすることに気がついた。
+
+そばにいた生徒や他の訪問客と共に中に入ると、
+そこには生徒数名と、死体が…！
+
+犯人は生徒数名の中にいる。
+
+あなたは真実を導き出せるかな？`;
+
+const target=
+document.getElementById('typewriter');
+
+let i=0;
+
+function type(){
+
+if(i<text.length){
+
+target.innerHTML+=
+text.charAt(i)
+.replace(/\n/g,'<br>');
+
+i++;
+
+setTimeout(type,40);
+
+}
+
+}
+
+setTimeout(type,5500);
+
+/* ===== ENTER ===== */
+
+document
+.querySelector('.enter-btn')
+.addEventListener('click',e=>{
+
+e.preventDefault();
+
+document
+.querySelector('#synopsis')
+.scrollIntoView({
+behavior:'smooth'
+});
+
+});
+
+</script>
+
+</body>
+</html>
