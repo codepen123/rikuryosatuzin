@@ -323,35 +323,30 @@ letter-spacing:.08em;
 
 position:relative;
 
+color:#ffffff;
+
 text-shadow:
-0 0 20px rgba(0,255,255,.5),
-0 0 60px rgba(0,255,255,.2);
+0 0 6px rgba(255,255,255,.9),
+0 0 18px rgba(0,255,255,.7),
+0 0 40px rgba(0,255,255,.35);
 
 animation:flicker 4s infinite alternate;
 
-}
-
-.hero-title::before,
-.hero-title::after{
-
-content:attr(data-text);
-
-position:absolute;
-
-left:0;
-top:0;
-
-width:100%;
+padding:0 .3em;
 
 }
+
+/* グリッチ弱め */
 
 .hero-title::before{
 
-color:#00ffff;
+color:#00e5ff;
+
+opacity:.45;
 
 z-index:-1;
 
-animation:glitchBlue 2s infinite;
+animation:glitchBlue 3s infinite;
 
 }
 
@@ -359,9 +354,11 @@ animation:glitchBlue 2s infinite;
 
 color:#ff0033;
 
+opacity:.28;
+
 z-index:-2;
 
-animation:glitchRed 2s infinite;
+animation:glitchRed 3s infinite;
 
 }
 
